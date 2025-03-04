@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const axios = require('axios');
 
-const LINE_ACCESS_TOKEN = 'YOUR_CHANNEL_ACCESS_TOKEN'; // ใส่ Channel Access Token ของคุณ
+const LINE_ACCESS_TOKEN = 'mjBswxJRSJh6lEUILZCQY0YtsiUNdrjfgc0TlwxyX81qDmYaqpYU08UlsHoNRAqgVtONzIYRnPYX2BVfR6R7lT95zD5Y2PN4LjhudPIB1dZUb3SPUN6mIoPgKNMPq/ECKTCht87DOXQC9mWhNIqCeQdB04t89/1O/w1cDnyilFU='; // ใส่ Channel Access Token ของคุณ
 
 // ฟังก์ชันสำหรับส่ง Flex Message
 const sendFlexMessage = (userId) => {
