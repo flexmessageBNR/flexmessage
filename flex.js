@@ -1,9 +1,8 @@
 const functions = require('firebase-functions');
 const axios = require('axios');
 
-const LINE_ACCESS_TOKEN = 'mjBswxJRSJh6lEUILZCQY0YtsiUNdrjfgc0TlwxyX81qDmYaqpYU08UlsHoNRAqgVtONzIYRnPYX2BVfR6R7lT95zD5Y2PN4LjhudPIB1dZUb3SPUN6mIoPgKNMPq/ECKTCht87DOXQC9mWhNIqCeQdB04t89/1O/w1cDnyilFU='; // ใส่ Channel Access Token ของคุณ
+const LINE_ACCESS_TOKEN = 'YOUR_CHANNEL_ACCESS_TOKEN'; // ใส่ Channel Access Token ของคุณ
 
-// ฟังก์ชันสำหรับส่ง Flex Message
 const sendFlexMessage = (userId) => {
   const flexMessage = {
     type: 'flex',
@@ -103,7 +102,6 @@ const sendFlexMessage = (userId) => {
   });
 };
 
-// ฟังก์ชัน Webhook ที่จะรับจาก Dialogflow และส่ง Flex Message
 exports.dialogflowWebhook = functions.https.onRequest((req, res) => {
   const action = req.body.queryResult.action;
 
@@ -113,13 +111,15 @@ exports.dialogflowWebhook = functions.https.onRequest((req, res) => {
 
     sendFlexMessage(userId)
       .then(() => {
-        res.send({ fulfillmentText: 'Welcome message sent!' });
+        // ส่งสถานะ HTTP 200 OK ให้ LINE
+        res.status(200).send({ fulfillmentText: 'Flex message sent!' });
       })
       .catch(error => {
         console.error('Error sending message:', error);
         res.status(500).send('Error');
       });
   } else {
-    res.send({ fulfillmentText: 'No follow event detected' });
+    // ส่งสถานะ HTTP 200 OK เมื่อไม่มีเหตุการณ์ `follow`
+    res.status(200).send({ fulfillmentText: 'No follow event detected' });
   }
 });
